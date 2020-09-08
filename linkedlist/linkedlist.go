@@ -58,3 +58,21 @@ func (l *LinkedList) GetFront() int {
 func (l *LinkedList) GetRear() int {
 	return l.Tail.Data
 }
+
+func (l *LinkedList) DeleteFront() {
+	if l.IsEmpty() == true {
+		return
+	} else {
+		l.Head = l.Head.Next
+	}
+	l.Size--
+}
+
+func (l *LinkedList) DeleteRear() {
+	if l.IsEmpty() == true {
+		return
+	} else {
+		l.Tail = l.Tail.Prev
+	}
+	l.Size--
+}
