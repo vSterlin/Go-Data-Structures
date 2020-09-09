@@ -116,6 +116,24 @@ func (l *LinkedList) DeleteRear() {
 	l.Size--
 }
 
+func (l *LinkedList) DeleteAtIndex(index int) {
+	if index <= 0 {
+		l.DeleteFront()
+	} else if index >= l.Size {
+		l.DeleteRear()
+	} else {
+		current := l.Head
+		i := 0
+		for i < index {
+			current = current.Next
+			i++
+		}
+		current.Prev.Next = current.Next
+		current.Next.Prev = current.Prev
+		l.Size--
+	}
+}
+
 func (l *LinkedList) PrintList() {
 	outputString := "{ "
 	current := l.Head
