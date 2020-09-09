@@ -1,5 +1,10 @@
 package linkedlist
 
+import (
+	"fmt"
+	"strconv"
+)
+
 type LinkedList struct {
 	Head *Node
 	Tail *Node
@@ -52,11 +57,43 @@ func (l *LinkedList) AddToRear(value int) {
 	l.Size++
 }
 
+func (l *LinkedList) AddAtIndex(value int, index int) {
+	if index <= 0 {
+		l.AddToFront(value)
+	} else if index >= l.Size {
+		l.AddToRear(value)
+	} else {
+		current := l.Head
+		nodeToAdd := new(Node)
+		nodeToAdd.Data = value
+		i := 0
+		for i < index {
+			current = current.Next
+			i++
+		}
+		nodeToAdd.Prev = current.Prev
+		nodeToAdd.Next = current
+		current.Prev.Next = nodeToAdd
+		current.Prev = nodeToAdd
+		l.Size++
+	}
+}
+
 func (l *LinkedList) GetFront() int {
 	return l.Head.Data
 }
 func (l *LinkedList) GetRear() int {
 	return l.Tail.Data
+}
+
+func (l *LinkedList) GetAtIndex(index int) int {
+	i := 0
+	current := l.Head
+	for i < index {
+		current = current.Next
+		i++
+	}
+	return current.Data
 }
 
 func (l *LinkedList) DeleteFront() {
@@ -75,4 +112,16 @@ func (l *LinkedList) DeleteRear() {
 		l.Tail = l.Tail.Prev
 	}
 	l.Size--
+}
+
+func (l *LinkedList) PrintList() {
+	outputString := "{ "
+	current := l.Head
+	for current != nil {
+		outputString += strconv.Itoa(current.Data) + ", "
+		current = current.Next
+	}
+	outputString = outputString[0 : len(outputString)-2]
+	outputString += " }"
+	fmt.Println(outputString)
 }
