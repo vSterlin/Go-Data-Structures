@@ -101,6 +101,7 @@ func (l *LinkedList) DeleteFront() {
 		return
 	} else {
 		l.Head = l.Head.Next
+		l.Head.Prev = nil
 	}
 	l.Size--
 }
@@ -110,6 +111,7 @@ func (l *LinkedList) DeleteRear() {
 		return
 	} else {
 		l.Tail = l.Tail.Prev
+		l.Tail.Next = nil
 	}
 	l.Size--
 }

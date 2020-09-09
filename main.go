@@ -11,6 +11,10 @@ func main() {
 		n.AddToFront(i)
 
 	}
+	n.DeleteFront()
+	n.DeleteRear()
+
+	n.AddAtIndex(123, 2)
 
 	n.PrintList()
 
